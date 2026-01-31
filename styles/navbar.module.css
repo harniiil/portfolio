@@ -1,0 +1,73 @@
+.wrap{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid var(--border);
+  background: rgba(245,242,236,.80);
+  backdrop-filter: blur(12px);
+}
+
+.inner{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand{
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.prompt{
+  color: rgba(14,15,18,.55);
+}
+
+.cursor{
+  width: 8px;
+  height: 14px;
+  border-radius: 2px;
+  background: rgba(44,110,203,.55);
+  box-shadow: 0 0 18px rgba(44,110,203,.35);
+  animation: blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes blink{
+  50% { opacity: 0; }
+}
+
+.nav{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+.a{
+  padding: 9px 12px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 650;
+  transition: background .18s ease, color .18s ease, border-color .18s ease;
+  border: 1px solid transparent;
+}
+
+.a:hover{
+  background: rgba(255,255,255,.66);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.active{
+  background: rgba(255,255,255,.86);
+  color: var(--ink);
+  border-color: var(--border2);
+}

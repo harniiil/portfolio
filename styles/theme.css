@@ -1,0 +1,34 @@
+:root{
+  /* Off-white that looks intentional */
+  --bg: #F5F2EC;
+  --bg2:#F8F6F1;
+
+  /* Surfaces */
+  --card: rgba(255,255,255,.72);
+  --card2: rgba(255,255,255,.86);
+
+  /* Borders */
+  --border: rgba(17,17,17,.10);
+  --border2: rgba(17,17,17,.14);
+
+  /* Text */
+  --ink:#0E0F12;
+  --muted: rgba(14,15,18,.78);   /* darker than before */
+  --muted2: rgba(14,15,18,.62);  /* darker than before */
+
+
+  /* Accent (calm “engineering blue”) */
+  --accent:#2C6ECB;
+  --accent2:#1F4E99;
+
+  /* Shadow */
+  --shadow: 0 18px 60px rgba(14,15,18,.10);
+  --shadow2: 0 8px 24px rgba(14,15,18,.08);
+
+  /* Radius */
+  --r1: 18px;
+  --r2: 24px;
+
+  /* Layout */
+  --max: 1080px;
+}

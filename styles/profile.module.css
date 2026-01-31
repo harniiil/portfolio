@@ -1,0 +1,115 @@
+.header{
+  padding: 26px;
+}
+
+.title{
+  font-size: 36px;
+  font-weight: 820;
+  letter-spacing: -0.03em;
+}
+
+.sub{
+  margin-top: 10px;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 70ch;
+  font-size: 15px;
+}
+
+.two{
+  display:grid;
+  gap: 16px;
+  grid-template-columns: 1fr;
+}
+
+@media(min-width: 900px){
+  .two{ grid-template-columns: 1fr 1fr; }
+}
+
+.skillWrap{
+  display:flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.block{
+  padding: 24px;
+}
+
+.blockTitle{
+  font-size: 15.5px;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.meta{
+  margin-top: 6px;
+  font-size: 14px;
+  color: rgba(14,15,18,.72);
+  line-height: 1.6;
+}
+
+.list{
+  margin-top: 14px;
+  padding-left: 18px;
+  color: rgba(14,15,18,.88);   /* darker */
+  line-height: 1.85;
+  font-size: 15.5px;
+}
+
+/* Certifications & Education emphasis */
+.list li{
+  margin-bottom: 8px;
+}
+
+/* Education text hierarchy fix */
+.list strong{
+  color: var(--ink);
+  font-weight: 750;
+}
+
+.list span{
+  color: rgba(14,15,18,.82);
+}
+
+
+
+/* NEW: Experience card spacing helper */
+.expCard{
+  padding: 26px;
+}
+
+@media(min-width: 900px){
+  .expCard{
+    padding: 30px;
+  }
+}
+
+.expTop{
+  display:flex;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+
+.expRole{
+  font-weight: 850;
+  letter-spacing: -0.01em;
+  font-size: 15.5px;
+}
+
+
+.expWhen{
+  font-size: 13.5px;
+  color: rgba(14,15,18,.70);   /* readable, still secondary */
+}
+
+
+.expOrg{
+  margin-top: 4px;
+  color: rgba(14,15,18,.82);   /* darker than muted */
+  font-size: 14.5px;
+}
+

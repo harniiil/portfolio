@@ -1,0 +1,26 @@
+.shell{
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section{
+  padding: 56px 0;
+}
+
+.sectionTight{
+  padding: 34px 0;
+}
+
+.h2{
+  font-size: 22px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.pMuted{
+  color: var(--muted);
+  line-height: 1.75;
+  font-size: 15px;
+}

@@ -1,0 +1,117 @@
+.card{
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  box-shadow: var(--shadow2);
+  backdrop-filter: blur(10px);
+}
+
+.cardStrong{
+  background: var(--card2);
+  border: 1px solid var(--border2);
+  border-radius: var(--r2);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+/* NEW: consistent, bigger padding wrapper for card content */
+.cardPad{
+  padding: 22px;
+}
+
+@media (min-width: 900px){
+  .cardPad{ padding: 26px; }
+}
+
+/* NEW: comfortable text rhythm */
+.reading{
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 70ch;
+}
+
+/* NEW: better pills */
+.pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.65);
+  color: rgba(14,15,18,.86);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+
+/* Buttons unchanged, but slightly better sizing */
+.btnPrimary{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+  color: white;
+  font-size: 14px;
+  font-weight: 650;
+  box-shadow: 0 14px 28px rgba(44,110,203,.22);
+  transition: transform .18s ease, opacity .18s ease;
+}
+
+.btnPrimary:hover{ transform: translateY(-1px); }
+
+.btnGhost{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.60);
+  border: 1px solid var(--border);
+  color: var(--ink);
+  font-size: 14px;
+  font-weight: 650;
+  transition: transform .18s ease, background .18s ease;
+}
+
+.btnGhost:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.82);
+}
+
+.link{
+  color: var(--accent);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.link:hover{
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}
+
+
+.card,
+.cardStrong{
+  color: rgba(14,15,18,.95);
+}
+
+
+/* Makes small paragraphs readable everywhere */
+.textBody{
+  color: rgba(14,15,18,.78);
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* Stronger small headings inside cards */
+.textLabel{
+  color: var(--ink);
+  font-size: 15.5px;
+  font-weight: 850;
+  letter-spacing: -0.01em;
+}
