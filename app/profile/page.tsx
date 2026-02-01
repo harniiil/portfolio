@@ -119,7 +119,7 @@ export default function ProfilePage() {
                 {skills.dev.map((s) => (
                   <Pill key={s} text={s} />
                 ))}
-                {skills.os?.map((s) => (
+                {skills.systems?.map((s) => (
                   <Pill key={s} text={s} />
                 ))}
               </div>
