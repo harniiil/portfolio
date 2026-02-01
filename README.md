@@ -1,18 +1,33 @@
-This repository contains the source code for my personal portfolio website. The site is built to present my skills, experience, and projects in network engineering, cloud infrastructure, and security, with a focus on clean design, reliability, and real-world engineering practices rather than visual noise.
+Getting Started
+First, run the development server:
 
-I’m a network and cloud-focused engineer based in London, United Kingdom, with a strong security mindset. My work centers on designing, maintaining, and troubleshooting reliable systems, from on-prem networking to cloud infrastructure, with an emphasis on uptime, clear architecture, and secure defaults. This portfolio highlights hands-on networking and cloud experience, security-aware workflows, practical projects, and academic experience.
+npm run dev
 
-The portfolio is built using Next.js (App Router) with TypeScript, CSS Modules for scoped styling, Framer Motion for subtle scroll animations, and is deployed on Vercel with automatic redeployments on every push to the main branch.
+# or
 
-Project structure is simple and intentional: `app/` contains pages and layouts, `components/` contains reusable UI components, `styles/` contains modular CSS files, and `public/` contains static assets such as images.
+yarn dev
 
-To run the project locally: clone the repository, install dependencies, and start the development server:
+# or
 
-`git clone https://github.com/harniiil/portfolio.git`  
-`cd portfolio`  
-`npm install`  
-`npm run dev`
+pnpm dev
 
-The site will be available at `http://localhost:3000`.
+# or
 
-For professional contact or collaboration, you can reach me on LinkedIn at https://www.linkedin.com/in/harnil-makwana or via email at makwanaharnil@gmail.com.
+bun dev
+Open http://localhost:3000 with your browser to see the result.
+
+You can start editing the page by modifying app/page.tsx. The page auto-updates as you edit the file.
+
+This project uses next/font to automatically optimize and load Geist, a new font family for Vercel.
+
+Learn More
+To learn more about Next.js, take a look at the following resources:
+
+Next.js Documentation - learn about Next.js features and API.
+Learn Next.js - an interactive Next.js tutorial.
+You can check out the Next.js GitHub repository - your feedback and contributions are welcome!
+
+Deploy on Vercel
+The easiest way to deploy your Next.js app is to use the Vercel Platform from the creators of Next.js.
+
+Check out our Next.js deployment documentation for more details.
