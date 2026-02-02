@@ -21,6 +21,9 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "Harnil Makwana — Network / Cloud / Security",
   description: "Minimal, professional portfolio for network & cloud engineering.",
+  icons: {
+    icon: "/harnil.ico",
+  },
 };
 
 export default function RootLayout({
