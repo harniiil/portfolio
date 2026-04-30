@@ -1,0 +1,40 @@
+/* ── Reveal — Apple spring curve ──────────────── */
+[data-reveal], [data-reveal-right] {
+  opacity: 0;
+  transform: translateY(52px) scale(0.97);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+[data-reveal-right] { transform: translateX(52px) scale(0.97); }
+[data-reveal].visible, [data-reveal-right].visible { opacity: 1; transform: none; }
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 1024px) {
+  .about-big-stats { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero-content { flex-direction: column-reverse; text-align: center; padding: 60px 24px 80px; gap: 40px; }
+  .hero-text { width: 100%; }
+  .hero-desc { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .hero-actions { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-photo { padding: 28px; margin-top: 0; }
+  .photo-frame { width: 260px; height: 260px; }
+  .venom-blob { inset: -16px; }
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .about-big-stats { grid-template-columns: repeat(2, 1fr); }
+  .projects-grid { grid-template-columns: 1fr; }
+  .project-card.featured { grid-column: auto; }
+  .section { padding: 80px 0; }
+  .section-statement { padding: 100px 0; }
+  .exp-card { padding: 22px 24px; }
+  .exp-header { flex-direction: column; gap: 10px; }
+}
+@media (max-width: 480px) {
+  .about-big-stats { grid-template-columns: repeat(2, 1fr); }
+  .hero-name { letter-spacing: -0.03em; }
+  .statement-text { letter-spacing: -0.02em; }
+  .big-stat { padding: 32px 16px; }
+}

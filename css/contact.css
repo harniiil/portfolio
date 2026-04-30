@@ -1,0 +1,23 @@
+/* ── Contact ──────────────────────────────────── */
+.contact-inner { max-width: 640px; }
+.contact-desc { font-size: 1.05rem; color: rgba(255,255,255,.65); line-height: 1.8; margin-bottom: 40px; }
+.contact-links { display: flex; flex-direction: column; gap: 12px; }
+.contact-link {
+  display: flex; align-items: center; gap: 14px; padding: 16px 22px;
+  background: var(--contact-link-bg); border: 1px solid var(--contact-link-border);
+  border-radius: var(--radius); font-size: 0.95rem; font-weight: 500;
+  color: rgba(255,255,255,.8); transition: var(--transition);
+}
+.contact-link:hover {
+  background: var(--contact-link-hover-bg); border-color: var(--contact-link-hover-border);
+  color: #ffffff; transform: translateX(6px);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.15);
+}
+.contact-link svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
+
+/* ── Footer ───────────────────────────────────── */
+footer {
+  background: var(--footer-bg); border-top: var(--footer-border);
+  padding: 28px 0; text-align: center;
+}
+footer p { font-size: 0.78rem; color: var(--footer-text); letter-spacing: 0.3px; }

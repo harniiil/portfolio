@@ -1,0 +1,62 @@
+/* ── Experience cards ─────────────────────────── */
+.exp-list { display: flex; flex-direction: column; gap: 12px; }
+.exp-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-left: 3px solid var(--accent); border-radius: var(--radius);
+  padding: 30px 36px;
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+  position: relative; overflow: hidden;
+}
+.exp-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 0% 50%, rgba(37,99,235,0.05), transparent 60%);
+  pointer-events: none; opacity: 0;
+  transition: opacity var(--transition);
+}
+.exp-card:hover::before { opacity: 1; }
+.exp-card:hover {
+  box-shadow: 0 0 0 1px rgba(37,99,235,0.25), 0 24px 64px rgba(0,0,0,.55);
+  transform: translateY(-3px);
+}
+[data-theme="light"] .exp-card:hover {
+  box-shadow: 0 0 0 1px rgba(37,99,235,0.2), 0 12px 40px rgba(13,17,40,0.1);
+}
+.exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 18px; flex-wrap: wrap; gap: 10px; }
+.exp-left { display: flex; flex-direction: column; gap: 3px; }
+.exp-role { font-family: var(--display); font-size: 1.05rem; font-weight: 700; color: var(--heading); }
+.exp-company { font-family: var(--mono); font-size: 0.76rem; color: var(--accent); font-weight: 500; }
+.exp-dates {
+  font-family: var(--mono); font-size: 0.72rem; color: var(--text);
+  white-space: nowrap; background: var(--bg-alt);
+  border: 1px solid var(--border); padding: 4px 12px; border-radius: 100px; flex-shrink: 0;
+}
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+.exp-bullets li { font-size: 0.92rem; color: var(--text); padding-left: 18px; position: relative; line-height: 1.7; }
+.exp-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-size: 0.72rem; top: 4px; }
+.exp-bullets li strong { color: var(--text-bright); font-weight: 600; }
+
+/* ── Skills (reuses exp-card, adds skill-specific styles) ── */
+.skill-icon {
+  width: 44px; height: 44px; background: var(--accent-pale);
+  border-radius: 10px; border: 1px solid rgba(37,99,235,0.15);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-bottom: 16px;
+}
+.skill-icon svg { width: 22px; height: 22px; color: var(--accent); }
+.skill-header-row { display: flex; align-items: center; gap: 14px; margin-bottom: 4px; }
+.skill-header-row .skill-icon { margin-bottom: 0; }
+.exp-card .skill-tags { margin-top: 20px; }
+.skill-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+.skill-tags span {
+  display: inline-block; font-size: 0.73rem; font-weight: 500;
+  color: var(--tag-text); background: var(--tag-bg);
+  border: 1px solid var(--tag-border);
+  padding: 5px 11px; border-radius: 100px; white-space: nowrap;
+  transition: color var(--transition), background var(--transition), border-color var(--transition);
+  cursor: default;
+}
+.skill-tags span:hover {
+  color: var(--heading);
+  background: rgba(37,99,235,0.13);
+  border-color: rgba(37,99,235,0.32);
+}

@@ -1,0 +1,54 @@
+/* ── Navbar ───────────────────────────────────── */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: transparent;
+  transition: background var(--transition), box-shadow var(--transition);
+}
+#navbar.scrolled {
+  background: var(--nav-scrolled-bg);
+  box-shadow: var(--nav-scrolled-shadow);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 24px;
+  height: 64px; display: flex; align-items: center;
+  justify-content: space-between; gap: 16px;
+}
+.nav-logo {
+  font-family: var(--display);
+  font-size: 1.1rem; font-weight: 700;
+  color: var(--nav-logo); letter-spacing: -0.3px;
+  transition: color var(--transition);
+}
+.nav-logo .dot { color: var(--accent); }
+.nav-links { display: flex; gap: 2px; list-style: none; align-items: center; }
+.nav-links a {
+  padding: 7px 12px; font-size: 0.85rem; font-weight: 500;
+  color: var(--nav-link); border-radius: 8px;
+  transition: color var(--transition), background var(--transition);
+}
+.nav-links a:hover, .active-link { color: var(--heading) !important; background: var(--accent-pale); }
+.nav-cta {
+  background: var(--accent) !important; color: var(--nav-cta-text) !important;
+  padding: 7px 18px !important; font-weight: 600 !important; border-radius: 980px !important;
+}
+.nav-cta:hover { opacity: 0.88 !important; transform: translateY(-1px); }
+
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span { display: block; width: 22px; height: 2px; background: var(--nav-link); border-radius: 2px; transition: var(--transition); }
+.mobile-menu {
+  display: none; flex-direction: column;
+  background: var(--mobile-menu-bg); border-top: 1px solid var(--border);
+  padding: 12px 24px 20px; backdrop-filter: blur(20px);
+}
+.mobile-menu a {
+  padding: 12px 0; font-weight: 500; font-size: 1rem;
+  color: var(--text-bright); border-bottom: 1px solid var(--mobile-link-border);
+  transition: color var(--transition);
+}
+.mobile-menu a:hover { color: var(--accent); }
+.mobile-menu.open { display: flex; }
