@@ -20,18 +20,34 @@ function initVenom() {
   });
   document.addEventListener('mouseleave', () => { targetX = 0; targetY = 0; });
 
-  const SPIKE_N   = 8;
-  const spikes    = [];
-  const photoCircle = photoFrame.querySelector('.photo-circle');
-  for (let i = 0; i < SPIKE_N; i++) {
-    const el = document.createElement('div');
-    el.className = 'venom-spike';
-    photoFrame.insertBefore(el, photoCircle);
-    spikes.push(el);
-  }
+  // Canvas for symbiote tendrils
+  const OVF = 80;
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = `position:absolute;top:-${OVF}px;left:-${OVF}px;z-index:1;pointer-events:none;`;
+  photoFrame.insertBefore(canvas, venomBlob.nextSibling);
 
-  const osc   = i => Math.sin(t * F[i % 10] + P[i % 10]) * A[i % 10];
+  function resizeCanvas() {
+    canvas.width  = photoFrame.offsetWidth  + OVF * 2;
+    canvas.height = photoFrame.offsetHeight + OVF * 2;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  const ctx = canvas.getContext('2d');
+
+  // Each tendril has an independent character
+  const TENDRIL_N = 14;
+  const tendrils = Array.from({ length: TENDRIL_N }, (_, i) => ({
+    baseAngle:   (i / TENDRIL_N) * Math.PI * 2,
+    phase:       (i * 1.37) % (Math.PI * 2),
+    wSpeed:      0.55 + (i % 5) * 0.14,
+    lenScale:    0.65 + (i % 4) * 0.18,
+    thickness:   3.5 + (i % 3) * 2.2,
+    curl:        ((i % 2 === 0) ? 1 : -1) * (0.3 + (i % 3) * 0.12),
+  }));
+
   const clamp = v => Math.max(20, Math.min(80, v));
+  const osc   = i => Math.sin(t * F[i % 10] + P[i % 10]) * A[i % 10];
 
   venomBlob.style.animation = 'none';
 
@@ -42,6 +58,7 @@ function initVenom() {
 
     const mx = smoothX * 26, my = smoothY * 26;
 
+    // Blob morph
     const r1 = clamp(50 + osc(0) + osc(5) * 0.4 + mx);
     const r2 = clamp(50 + osc(1) + osc(6) * 0.4 - mx * 0.9);
     const r3 = clamp(50 + osc(2) + osc(7) * 0.4 + my * 0.8);
@@ -51,30 +68,68 @@ function initVenom() {
       `${r1}% ${100-r1}% ${r2}% ${100-r2}% / ${r3}% ${r4}% ${100-r4}% ${100-r3}%`;
     venomBlob.style.transform = `scale(${1 + Math.sin(t * 0.75) * 0.02})`;
 
-    const fw = photoFrame.offsetWidth || 410;
-    const cx = fw / 2, cy = fw / 2;
-    const R  = fw * 0.465;
+    // Draw tendrils
+    const cw = canvas.width, ch = canvas.height;
+    ctx.clearRect(0, 0, cw, ch);
 
-    spikes.forEach((sp, i) => {
-      const baseAng = (i / SPIKE_N) * Math.PI * 2;
-      const wobble  = Math.sin(t * F[i % 10] + P[i % 10]) * 0.24
-                    + Math.cos(t * F[(i+1)%10] * 0.65) * 0.11;
-      const ang = baseAng + wobble
-                + smoothX * 0.13 * Math.cos(baseAng)
-                + smoothY * 0.13 * Math.sin(baseAng);
+    const ccx = cw / 2, ccy = ch / 2;
+    const photoR = photoFrame.offsetWidth * 0.46;
 
-      const lenMod = 0.45 + Math.abs(Math.sin(t * F[(i+2)%10] + P[(i+1)%10])) * 0.75;
-      const h = Math.round(34 * lenMod);
-      const w = Math.round(8 + Math.sin(t * F[(i+4)%10]) * 2.5);
-      const bx = cx + Math.cos(ang) * R;
-      const by = cy + Math.sin(ang) * R;
+    tendrils.forEach(ten => {
+      const wobble = Math.sin(t * ten.wSpeed + ten.phase) * 0.32
+                   + Math.cos(t * ten.wSpeed * 0.61 + ten.phase * 1.4) * 0.14;
+      const ang = ten.baseAngle + wobble
+                + smoothX * 0.2 * Math.cos(ten.baseAngle)
+                + smoothY * 0.2 * Math.sin(ten.baseAngle);
 
-      sp.style.width     = `${w}px`;
-      sp.style.height    = `${h}px`;
-      sp.style.left      = `${bx - w * 0.5}px`;
-      sp.style.top       = `${by - h}px`;
-      sp.style.transform = `rotate(${ang * 180 / Math.PI + 90}deg)`;
-      sp.style.opacity   = 0.45 + Math.abs(Math.sin(t * F[(i+3)%10] * 0.85)) * 0.5;
+      const pulse  = 0.75 + Math.abs(Math.sin(t * 0.45 + ten.phase)) * 0.55;
+      const length = photoR * 0.52 * ten.lenScale * pulse + 24;
+
+      // Root at photo-circle edge
+      const sx = ccx + Math.cos(ang) * photoR;
+      const sy = ccy + Math.sin(ang) * photoR;
+
+      // Control point — offset perpendicular to add curl
+      const perpAng = ang + Math.PI / 2;
+      const curlAmt = ten.curl * length * 0.55 * Math.sin(t * 0.7 + ten.phase);
+      const cpx = ccx + Math.cos(ang) * (photoR + length * 0.5) + Math.cos(perpAng) * curlAmt;
+      const cpy = ccy + Math.sin(ang) * (photoR + length * 0.5) + Math.sin(perpAng) * curlAmt;
+
+      // Tip
+      const tipAng = ang + Math.sin(t * 0.5 + ten.phase * 1.6) * 0.5;
+      const ex = ccx + Math.cos(tipAng) * (photoR + length);
+      const ey = ccy + Math.sin(tipAng) * (photoR + length);
+
+      const alpha = 0.55 + Math.sin(t * 0.85 + ten.phase) * 0.2;
+      const thick = ten.thickness * (1 + Math.sin(t * ten.wSpeed * 1.1 + ten.phase) * 0.2);
+
+      // Main tendril body — dark symbiote ink
+      const bodyGrad = ctx.createLinearGradient(sx, sy, ex, ey);
+      bodyGrad.addColorStop(0,   `rgba(8, 4, 18, ${alpha})`);
+      bodyGrad.addColorStop(0.5, `rgba(5, 2, 12, ${alpha * 0.8})`);
+      bodyGrad.addColorStop(1,   `rgba(2, 0,  8, 0)`);
+
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.quadraticCurveTo(cpx, cpy, ex, ey);
+      ctx.strokeStyle = bodyGrad;
+      ctx.lineWidth   = thick;
+      ctx.lineCap     = 'round';
+      ctx.lineJoin    = 'round';
+      ctx.stroke();
+
+      // Edge shimmer — faint blue-purple iridescence
+      const shimGrad = ctx.createLinearGradient(sx, sy, ex, ey);
+      shimGrad.addColorStop(0,   `rgba(80, 40, 180, ${alpha * 0.45})`);
+      shimGrad.addColorStop(0.45,`rgba(37, 99, 235, ${alpha * 0.22})`);
+      shimGrad.addColorStop(1,   `rgba(0,  0,   0,  0)`);
+
+      ctx.beginPath();
+      ctx.moveTo(sx, sy);
+      ctx.quadraticCurveTo(cpx, cpy, ex, ey);
+      ctx.strokeStyle = shimGrad;
+      ctx.lineWidth   = thick * 0.35;
+      ctx.stroke();
     });
 
     requestAnimationFrame(loop);
